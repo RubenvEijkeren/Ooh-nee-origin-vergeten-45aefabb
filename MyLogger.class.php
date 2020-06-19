@@ -1,4 +1,4 @@
-<?php  
+<?php
 /**
  * 
  */
@@ -42,11 +42,9 @@ class MyLogger
 try {
     $logger = new MyLogger('Admin');
     $logger->error("dit is een error");
-}
-catch(Exception $e){
+} catch (Exception $e) {
     echo "Error: " . $e->getMessage();
-}
-catch(ArgumentCountError $e){
+} catch (ArgumentCountError $e) {
     echo "Error: " . $e->getMessage();
 }
 ?>
