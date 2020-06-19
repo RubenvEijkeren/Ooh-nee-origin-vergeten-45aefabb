@@ -5,9 +5,13 @@
 class MyLogger
 {
     public $origin;
-    public function setOrigin($name)
+    public function __construct($name)
     {
-        $this->origin = $name;
+        if ($name === '') {
+            throw new Exception("origin is empty");
+        } else {
+            $this->origin = $name;
+        }
     }
     public function log($message, $level)
     {
@@ -32,10 +36,17 @@ class MyLogger
     private function logWithTime($message)
     {
         date_default_timezone_set('Europe/Amsterdam');
-        echo Date("Y-m-d H:i:s") . " " . $this->origin . " - " . $message;
+        echo Date("Y-m-d H:i:s") . " " . $this->origin . " - " . $message . PHP_EOL;
     }
 }
-$logger = new MyLogger();
-$logger->setOrigin('Admin');
-$logger->error("dit is een error");
+try {
+    $logger = new MyLogger('Admin');
+    $logger->error("dit is een error");
+}
+catch(Exception $e){
+    echo "Error: " . $e->getMessage();
+}
+catch(ArgumentCountError $e){
+    echo "Error: " . $e->getMessage();
+}
 ?>
